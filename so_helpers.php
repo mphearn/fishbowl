@@ -104,10 +104,10 @@ function fishbowlOrderFromNetSuiteRecord($netsuite_record) {
     $order->status = 20; // Status
     $order->customerName =  "Clubhub"; // CustomerName
 
-    if isset($netsuite_record->basic->shipAttention[0]) {
-        $order->customerContact =  $netsuite_record->basic->shipAttention[0]->searchValue; // CustomerContact
+    if (isset($netsuite_record->basic->shipAttention[0])) {
+        $order->customerContact = $netsuite_record->basic->shipAttention[0]->searchValue; // CustomerContact
     } else {
-        $msg = "Shipping Attention record missing for NetSuite Sales Order " . $order->number . "."
+        $msg = "Shipping Attention record missing for NetSuite Sales Order " . $order->number . ".";
         error_log($msg);
         echo $msg;
     }
@@ -125,13 +125,13 @@ function fishbowlOrderFromNetSuiteRecord($netsuite_record) {
     $shipTo->name = $netsuite_record->basic->shipAddressee[0]->searchValue . " Attn: " .
             $netsuite_record->basic->shipAttention[0]->searchValue;
 
-    if isset($netsuite_record->basic->shipAddress1[0]) {
+    if (isset($netsuite_record->basic->shipAddress1[0])) {
         $shipTo->addressField = $netsuite_record->basic->shipAddress1[0]->searchValue;
     }
-    if isset($netsuite_record->basic->shipAddress2[0]) {
+    if (isset($netsuite_record->basic->shipAddress2[0])) {
         $shipTo->addressField .= " " . $netsuite_record->basic->shipAddress2[0]->searchValue;
     }
-    if isset($netsuite_record->basic->shipAddress3[0]) {
+    if (isset($netsuite_record->basic->shipAddress3[0])) {
         $shipTo->addressField .= " " . $netsuite_record->basic->shipAddress3[0]->searchValue;
     }
 
