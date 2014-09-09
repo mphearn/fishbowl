@@ -1,0 +1,10 @@
+*.swp
+*~
+tags
+
+NSconfig.php
+prod_NSconfig.php
+sandbox_NSconfig.php
+FBconfig.php
+prod_FBconfig.php
+sandbox_FBconfig.php
