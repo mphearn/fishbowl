@@ -103,7 +103,14 @@ function fishbowlOrderFromNetSuiteRecord($netsuite_record) {
     $order->number = $netsuite_record->basic->tranId[0]->searchValue; // SONum
     $order->status = 20; // Status
     $order->customerName =  "Clubhub"; // CustomerName
-    $order->customerContact =  $netsuite_record->basic->shipAttention[0]->searchValue; // CustomerContact
+
+    if isset($netsuite_record->basic->shipAttention[0]) {
+        $order->customerContact =  $netsuite_record->basic->shipAttention[0]->searchValue; // CustomerContact
+    } else {
+        $msg = "Shipping Attention record missing for NetSuite Sales Order " . $order->number . "."
+        error_log($msg);
+        echo $msg;
+    }
 
     $billTo = new FbPersonAddress;
     $billTo->name = "Clubhub";
@@ -117,8 +124,17 @@ function fishbowlOrderFromNetSuiteRecord($netsuite_record) {
     $shipTo = new FbPersonAddress;
     $shipTo->name = $netsuite_record->basic->shipAddressee[0]->searchValue . " Attn: " .
             $netsuite_record->basic->shipAttention[0]->searchValue;
-    $shipTo->addressField= $netsuite_record->basic->shipAddress1[0]->searchValue . " " .
-            $netsuite_record->basic->shipAddress2[0]->searchValue . " " . $netsuite_record->basic->shipAddress3[0]->searchValue;
+
+    if isset($netsuite_record->basic->shipAddress1[0]) {
+        $shipTo->addressField = $netsuite_record->basic->shipAddress1[0]->searchValue;
+    }
+    if isset($netsuite_record->basic->shipAddress2[0]) {
+        $shipTo->addressField .= " " . $netsuite_record->basic->shipAddress2[0]->searchValue;
+    }
+    if isset($netsuite_record->basic->shipAddress3[0]) {
+        $shipTo->addressField .= " " . $netsuite_record->basic->shipAddress3[0]->searchValue;
+    }
+
     $shipTo->city = $netsuite_record->basic->shipCity[0]->searchValue;
     $shipTo->state = $netsuite_record->basic->shipState[0]->searchValue;
     $shipTo->zip = $netsuite_record->basic->shipZip[0]->searchValue;

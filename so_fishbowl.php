@@ -79,11 +79,10 @@ foreach ($records as $record) {
 
 foreach ($salesOrders as $salesOrder) {
     if ($salesOrder->validateSerialNumbers()) {
-        $fbapi->saveSalesOrder($salesOrder);
-
-        // Add this to the list of internal id's to be marked as uploaded in Netsuite
-        //array_push($int_ids, $record->basic->internalId[0]->searchValue->internalId);
-        array_push($int_ids, $salesOrder->items[0]->soid);
+        if ($fbapi->saveSalesOrder($salesOrder)) {
+            // Add this to the list of internal id's to be marked as uploaded in Netsuite
+            array_push($int_ids, $salesOrder->items[0]->soid);
+        }
     }
 }
 // Close the connection to Fishbowl.
