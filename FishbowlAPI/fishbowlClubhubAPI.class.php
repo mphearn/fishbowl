@@ -49,8 +49,8 @@ class FishbowlClubhubAPI extends FishbowlAPI {
             // Display error messages
             $msg = "An error occurred saving an order to Fishbowl. Error code is " . $this->statusCode . ".\n";
             error_log($msg);
-            if (!empty($this->statusMsg)) {
-                echo $this->statusMsg;
+
+            if (isset($this->statusMsg) && ($this->statusMsg != 'null')) {
                 error_log($this->statusMsg);
             }
 

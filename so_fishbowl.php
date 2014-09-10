@@ -42,8 +42,10 @@ $fbapi->Login($fishbowl_user, $fishbowl_pw);
 if ($fbapi->loggedIn) {
     echo "Logged in to Fishbowl successfully.\n";
 } else {
-    exit("An error occurred logging in to Fishbowl: " . $fbapi->statusCode .
-            ", " . $fbapi->statusMsg . "\n");
+    $msg = "An error occurred logging in to Fishbowl: " . $fbapi->statusCode .
+            ", " . $fbapi->statusMsg . "\n";
+    error_log($msg);
+    exit($msg);
 }
 // Get the list of records from the NetSuite search.
 $records = $searchResponse->searchResult->searchRowList->searchRow;
