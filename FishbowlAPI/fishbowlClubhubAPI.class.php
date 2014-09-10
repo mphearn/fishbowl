@@ -45,7 +45,7 @@ class FishbowlClubhubAPI extends FishbowlAPI {
         $this->setResult($this->parseXML($this->xmlResponse));
         $this->setStatus('SOSaveRs');
 
-        if ($fbapi->statusCode != 1000) {
+        if ($this->statusCode != 1000) {
             // Display error messages
             $msg = 'An error occurred saving an order to Fishbowl.';
             echo $msg;
