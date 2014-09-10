@@ -67,7 +67,9 @@ function markUploaded($soid) {
 
     $getResponse = $service2->get($gr);
     if (!$getResponse->readResponse->status->isSuccess) {
-            error_log("GET ERROR on SO Internal Id lookup\n");
+            $msg = "GET ERROR on SO Internal Id lookup\n";
+            error_log($msg);
+            echo $msg;
             exit();
     } else {
             echo "GET SUCCESS\n";
@@ -90,7 +92,9 @@ function markUploaded($soid) {
 
     $updateResponse = $service2->update($request);
     if (!$updateResponse->writeResponse->status->isSuccess) {
-            error_log("UPDATE ERROR\n");
+            $msg = "UPDATE ERROR\n";
+            error_log($msg);
+            echo $msg;
     } else {
             echo "UPDATE SUCCESS, id " . $updateResponse->writeResponse->baseRef->internalId . "\n";
     }
@@ -109,6 +113,7 @@ function fishbowlOrderFromNetSuiteRecord($netsuite_record) {
     } else {
         $msg = "Shipping Attention record missing for NetSuite Sales Order " . $order->number . ".";
         error_log($msg);
+        echo $msg;
     }
 
     $billTo = new FbPersonAddress;
