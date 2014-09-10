@@ -47,8 +47,7 @@ class FishbowlClubhubAPI extends FishbowlAPI {
 
         if ($this->statusCode != 1000) {
             // Display error messages
-            $msg = 'An error occurred saving an order to Fishbowl.';
-            echo $msg;
+            $msg = "An error occurred saving an order to Fishbowl. Error code is " . $this->statusCode . ".\n";
             error_log($msg);
             if (!empty($this->statusMsg)) {
                 echo $this->statusMsg;
@@ -77,7 +76,7 @@ class FishbowlClubhubAPI extends FishbowlAPI {
 
         // Set the result
         $this->setResult($this->parseXML($this->xmlResponse));
-        $this->setStatus($status);
+        $this->setStatus('SOSaveRs');
     }
 
     private function stripUnicodeCharacters($string) {

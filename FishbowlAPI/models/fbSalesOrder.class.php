@@ -24,7 +24,7 @@ class FbSalesOrder {
     public $taxRateName;
     public $shippingTerms;
     public $paymentTerms;
-    public $CustomerName;
+    public $customerName;
     public $fob;
     public $quickBooksClassName;
     public $locationGroup;
@@ -87,7 +87,7 @@ class FbSalesOrder {
             break;
           } else {
             $nums = explode(" ", trim($item->serialNumbers));
-            
+
             if (count($nums) != $item->quantity) {
               echo "Order " . $this->number . " has a mismatch in the count of serial numbers vs. assembly item qty.  Not valid for upload to Fishbowl.\n";
               $valid = false;
