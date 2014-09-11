@@ -311,6 +311,10 @@ class FishbowlAPI {
             $value = (array) $value;
             if (isset($value[0])) {
                 if (count($value) > 1) {
+                    if ($value[0] instanceof SimpleXMLElement) {
+                        $newArray[$value[0]->getName()] = (array) $value[0];
+                    }
+
                     $newArray[$key] = (array) $value;
                 } else {
                     $newArray[$key] = trim($value[0]);
