@@ -1,10 +1,8 @@
 <?php
 /**
- * @package : FishbowlPI
- * @author : dnewsom <dave.newsom@fishbowlinventory.com>
- * @author : kbatchelor <kevin.batchelor@fishbowlinventory.com>
- * @version : 1.2
- * @date : 2010-04-29
+ * @package : FishbowlClubhubAPI
+ * @author : Sam Bloomquist
+ * @date : 2014-08-01
  *
  * Utility routines for Fishbowls API
  */
