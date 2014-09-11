@@ -43,11 +43,11 @@ class FishbowlClubhubAPI extends FishbowlAPI {
 
         // Set the result
         $this->setResult($this->parseXML($this->xmlResponse));
-        $this->setStatus('SOSaveRs');
+        $this->setStatus('SaveSORs');
 
         if ($this->statusCode != 1000) {
             // Display error messages
-            $msg = "An error occurred saving an order to Fishbowl. Error code is " . $this->statusCode . ".\n";
+            $msg = "An error occurred saving order " . $order->number . " to Fishbowl. Error code is " . $this->statusCode . ".\n";
             error_log($msg);
             echo $msg;
 
@@ -58,6 +58,7 @@ class FishbowlClubhubAPI extends FishbowlAPI {
 
             return false;
         } else {
+            echo "Order " . $order->number . " uploaded successfully";
             return true;
         }
     }
