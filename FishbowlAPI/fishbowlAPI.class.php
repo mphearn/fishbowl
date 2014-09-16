@@ -379,6 +379,9 @@ class FishbowlAPI {
         if (isset($this->result[$response])) {
             $this->statusCode = $this->result[$response]['@attributes']['statusCode'];
             $this->statusMsg = $this->result[$response]['@attributes']['statusMessage'];
+        } elseif (isset($this->result['FbiMsgsRs'][$response])) {
+            $this->statusCode = $this->result['FbiMsgsRs'][$response]['@attributes']['statusCode'];
+            $this->statusMsg = $this->result['FbiMsgsRs'][$response]['@attributes']['statusMessage'];
         } else {
             $this->statusCode = $this->result['FbiMsgsRs']['@attributes']['statusCode'];
             $this->statusMsg = $this->result['FbiMsgsRs']['@attributes']['statusMessage'];
