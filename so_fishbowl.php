@@ -71,6 +71,12 @@ foreach ($records as $record) {
         if (($lastOrder == null) || ($lastOrder->number != $record->basic->tranId[0]->searchValue)) {
             // Create a new order and the first item
             $lastOrder = fishbowlOrderFromNetSuiteRecord($record);
+            if (!isset($lastOrder)) {
+                // If the fishbowlOrderFromNetSuiteRecord returns null, there was a problem with
+                // this order, continue on to the next one.
+                continue;
+            }
+
             $lastOrder->items[] = fishbowlOrderItemFromNetSuiteRecord($record, $lastOrder);
             $salesOrders[] = $lastOrder;
         } else {

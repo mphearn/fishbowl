@@ -111,9 +111,10 @@ function fishbowlOrderFromNetSuiteRecord($netsuite_record) {
     if (isset($netsuite_record->basic->shipAttention[0])) {
         $order->customerContact = $netsuite_record->basic->shipAttention[0]->searchValue; // CustomerContact
     } else {
-        $msg = "Shipping Attention record missing for NetSuite Sales Order " . $order->number . ".";
+        $msg = "Shipping Attention record missing for NetSuite Sales Order " . $order->number . ".\n";
         error_log($msg);
         echo $msg;
+        return null; // returning null signifies to the calling script/object that this order had a problem.
     }
 
     $billTo = new FbPersonAddress;
