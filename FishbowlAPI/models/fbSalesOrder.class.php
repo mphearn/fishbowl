@@ -86,7 +86,7 @@ class FbSalesOrder {
             $valid = false;
             break;
           } else {
-            $nums = explode(" ", trim($item->serialNumbers));
+            $nums = explode("\n", trim($item->serialNumbers));
 
             if (count($nums) != $item->quantity) {
               echo "Order " . $this->number . " has a mismatch in the count of serial numbers vs. assembly item qty.  Not valid for upload to Fishbowl.\n";
