@@ -18,8 +18,8 @@ class FbPersonAddress {
      * @return XML string of this object's representation in the fishbowlAPI.
      */
     public function toXML() {
-      $_xmlString = "    <Name>" . $this->name . "</Name>\n" .
-                    "    <AddressField>" . $this->addressField . "</AddressField>\n" .
+      $_xmlString = "    <Name>" . htmlspecialchars($this->name) . "</Name>\n" .
+                    "    <AddressField>" . htmlspecialchars($this->addressField) . "</AddressField>\n" .
                     "    <City>" . $this->city . "</City>\n" .
                     "    <Zip>" . $this->zip . "</Zip>\n" .
                     "    <Country>" . $this->country . "</Country>\n" .
